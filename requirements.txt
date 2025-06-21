@@ -1,7 +1,7 @@
 streamlit
 transformers==4.36.2
 torch
-tensorflow-cpu==2.11.0
+tensorflow==2.9.1
 scikit-learn
 pandas
 numpy
