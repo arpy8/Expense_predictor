@@ -1,7 +1,7 @@
 streamlit
 transformers
 torch
-tensorflow>=2.19.0
+tensorflow==2.12.0
 scikit-learn
 pandas
 numpy
