@@ -1,5 +1,5 @@
 streamlit
-transformers==4.36.2
+transformers
 torch
 tensorflow==2.9.1
 scikit-learn
