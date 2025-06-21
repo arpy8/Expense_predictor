@@ -19,7 +19,7 @@ def load_all_models():
 
 bert_model, tokenizer, lstm_model, amount_scaler, city_encoder = load_all_models()
 
-st.title("💸 Smart Expense Predictor & Budget Planner")
+st.title("Smart Expense Predictor & Budget Planner")
 
 uploaded_file = st.file_uploader("Upload your CSV transaction file", type="csv")
 
@@ -28,13 +28,13 @@ if uploaded_file is not None:
 
     # Preprocessing
     cc['description'] = cc['Expense_Type'] + " using " + cc['Card_Type'] + " in " + cc['City']
-    # Encode city column with trained encoder
+    # Encode city column
     cc['City'] = city_encoder.transform(cc['City'])
     cc['Date'] = pd.to_datetime(cc['Date'])
     cc = cc.sort_values(by='Date')
     cc['month'] = cc['Date'].dt.to_period('M').dt.to_timestamp()
 
-    # BERT Classification
+    # BERT
     inputs = tokenizer(list(cc['description']), truncation=True, padding=True, return_tensors='pt')
     with torch.no_grad():
         outputs = bert_model(**inputs)
@@ -51,10 +51,10 @@ if uploaded_file is not None:
     prediction = lstm_model.predict(sequence)
     forecast = amount_scaler.inverse_transform([[prediction[0][0]]])[0][0]
 
-    st.subheader("📈 Forecast")
+    st.subheader("Forecast")
     st.write(f"Predicted next month’s spending: ₹{forecast:.2f}")
 
     # Plot
     st.line_chart(monthly.set_index('month')['Amount'])
 
-    # Optional: add cluster-based suggestion section later
+    
