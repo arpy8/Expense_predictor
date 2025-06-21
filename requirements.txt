@@ -1,0 +1,7 @@
+streamlit
+transformers
+torch
+tensorflow
+scikit-learn
+pandas
+numpy
